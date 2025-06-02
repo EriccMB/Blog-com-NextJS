@@ -1,4 +1,4 @@
-import { postRepository } from "@/repositories/post";
+import { postRepository } from '@/repositories/post';
 
 export async function Posts() {
   const posts = await postRepository.findAll();

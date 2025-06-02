@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Blog com NextJS",
+  title: 'Blog',
+  description: 'Blog com NextJS',
 };
 
 type RootLayoutProps = {

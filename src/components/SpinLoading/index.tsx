@@ -1,11 +1,11 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
 type SpinLoadingProps = {
   spinClasses?: string;
 };
 
 export function SpinLoading({ spinClasses }: SpinLoadingProps) {
-    const classes = clsx("flex items-center justify-center ", spinClasses);
+  const classes = clsx('flex items-center justify-center ', spinClasses);
 
   return (
     <div className={classes}>

@@ -10,6 +10,7 @@
   "code-runner.executorMap": {
     "typescript": "clear; npx tsx"
   },
+  "prettier.singleQuote": true,
 
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"

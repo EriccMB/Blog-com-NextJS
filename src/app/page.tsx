@@ -1,12 +1,13 @@
-import { Container } from "@/components/Container";
-import { Posts } from "@/components/Posts";
-import { SpinLoading } from "@/components/SpinLoading";
-import { Suspense } from "react";
+import { Container } from '@/components/Container';
+import { Header } from '@/components/Header';
+import { Posts } from '@/components/Posts';
+import { SpinLoading } from '@/components/SpinLoading';
+import { Suspense } from 'react';
 
 export default async function Home() {
   return (
     <Container>
-      <h1>AFDSFSD</h1>
+      <Header />
       <Suspense fallback={<SpinLoading />}>
         <Posts />
       </Suspense>
