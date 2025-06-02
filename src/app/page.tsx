@@ -1,9 +1,16 @@
-import clsx from "clsx";
+import { Container } from "@/components/Container";
+import { Posts } from "@/components/Posts";
+import { SpinLoading } from "@/components/SpinLoading";
+import { Suspense } from "react";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <div className={clsx("bg-red-400", "hover:bg-amber-100", "hover:bg-amber-100", "hover:bg-amber-100")}>
-      <h1  className="text-blue-300 text-5xl">Osda</h1>
-    </div>
+    <Container>
+      <h1>AFDSFSD</h1>
+      <Suspense fallback={<SpinLoading />}>
+        <Posts />
+      </Suspense>
+      <h1>AFDSFSD</h1>
+    </Container>
   );
 }
