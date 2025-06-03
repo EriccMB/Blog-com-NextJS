@@ -14,12 +14,12 @@ export function PostHeading({
 }: PostHeadingProps) {
   const headingMapClasses = {
     h1: 'text-2xl/tight sm:text-4xl',
-    h2: 'text-red-900 text-2xl/tight sm:text-4xl',
+    h2: 'text-2xl/tight',
   };
   const commonClasses = 'font-extrabold';
   return (
     <HeadingClass className={clsx(commonClasses, headingMapClasses[HeadingClass])}>
-      <Link href={url}>{children}</Link>
+      <Link className='group-hover:text-stone-600' href={url}>{children}</Link>
     </HeadingClass>
   );
 }

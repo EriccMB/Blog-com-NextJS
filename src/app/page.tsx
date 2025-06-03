@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <Container>
       <Header />
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 group">
+      <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 group mb-10">
         <Link href="#" className="w-full h-full overflow-hidden rounded-2xl">
           <Image
             className="w-full h-full group-hover:scale-105 transition object-cover object-center"
