@@ -8,16 +8,17 @@ export async function Posts() {
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
       {posts.map((post) => {
+        const postLink = `/posts/${post.slug}`
         return (
           <div className="flex flex-col gap-4 group" key={post.id}>
             <PostImage
-              href={`/posts/${post.slug}`}
+              url={postLink}
               alt={post.title}
               src={post.coverImageUrl}
             />
             <PostText
               time={post.createdAt}
-              url={`/posts/${post.slug}`}
+              url={postLink}
               textContent={post.excerpt}
               title={post.title}
             />
