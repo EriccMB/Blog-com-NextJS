@@ -4,7 +4,6 @@ import Link from 'next/link';
 export function Header() {
   return (
     <header>
-      {/** sm: é acima de 640px */}
       <h1
         className={clsx(
           'text-5xl font-extrabold py-9',

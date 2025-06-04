@@ -5,12 +5,13 @@ type PostTextProps = {
   url: string;
   textContent: string;
   title: string;
+  dateTime: string;
 };
 
-export function PostText({ time, url, textContent, title }: PostTextProps) {
+export function PostText({ time, url, textContent, title, dateTime }: PostTextProps) {
   return (
     <div className="flex flex-col gap-3 justify-start">
-      <time dateTime="2025-05-10" className="text-stone-500 text-sm">
+      <time dateTime={dateTime} className="text-stone-500 text-sm">
         {time}
       </time>
       <PostHeading as='h2' url={url}>{title}</PostHeading>
