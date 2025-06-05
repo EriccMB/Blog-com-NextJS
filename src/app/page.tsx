@@ -1,3 +1,4 @@
+import { ButtonChangeTheme } from '@/components/ButtonChangeTheme';
 import { Container } from '@/components/Container';
 import { FeaturedPost } from '@/components/FeaturedPost';
 import { Header } from '@/components/Header';
@@ -8,13 +9,16 @@ import { Suspense } from 'react';
 
 export default async function Home() {
   return (
-    <Container>
-      <Header />
-      <FeaturedPost />
+    <>
+      <Container>
+        <Header />
+        <FeaturedPost />
 
-      <Suspense fallback={<SpinLoading />}>
-        <Posts />
-      </Suspense>
-    </Container>
+        <Suspense fallback={<SpinLoading />}>
+          <Posts />
+        </Suspense>
+      </Container>
+      <ButtonChangeTheme />
+    </>
   );
 }
