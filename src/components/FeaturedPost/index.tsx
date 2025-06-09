@@ -1,24 +1,29 @@
-import { PostHeading } from "../PostHeading";
-import { PostImage } from "../PostImage";
+import { getFormatedDateTime, getRelativeDate } from '@/utils/get-formateddate';
+import { PostImage } from '../PostImage';
+import { PostText } from '../PostText';
+import { getAllPublishedPosts, getPostById } from '@/utils/post/queries';
 
-export function FeaturedPost() {
-    const slug = 'sla';
-    const postLink = `/posts/${slug}`
+export async function FeaturedPost() {
+  const posts = await getAllPublishedPosts();
+  const post = await getPostById("99f8add4-7684-4c16-a316-616271db199e");
+  console.log(post)
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 group mb-10">
-      <PostImage url={postLink} alt="Title" src="/images/bryen_1.png" priority />
-      <div className="flex flex-col gap-3 justify-start">
-        <time dateTime="2025-05-10" className="text-stone-500 text-sm">
-          10-05-2025 09:00
-        </time>
-        <PostHeading url={postLink}>Featured Post</PostHeading>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate
-          maiores, ut quibusdam non architecto quos? Amet labore veniam id error
-          obcaecati blanditiis laborum eligendi esse expedita. Ducimus, laborum
-          odit asperiores
-        </p>
-      </div>
+      <PostImage
+        url={`/posts/${posts[0].slug}`}
+        alt={posts[0].title}
+        src={posts[0].coverImageUrl}
+        priority
+      />
+      <PostText
+        postHeading={'h1'}
+        dateTime={posts[0].createdAt}
+        time={getFormatedDateTime(posts[0].createdAt)}
+        relativeDate={getRelativeDate(posts[0].createdAt)}
+        url={`/posts/${posts[0].slug}`}
+        textContent={posts[0].excerpt}
+        title={posts[0].title}
+      />
     </section>
   );
 }

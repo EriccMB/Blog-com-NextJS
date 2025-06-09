@@ -1,10 +1,10 @@
-import { postRepository } from '@/repositories/post';
 import { PostImage } from '../PostImage';
 import { PostText } from '../PostText';
-import { getFormatedDateTime } from '@/utils/get-formateddate';
+import { getFormatedDateTime, getRelativeDate } from '@/utils/get-formateddate';
+import { getAllPublishedPosts } from '@/utils/post/queries';
 
 export async function Posts() {
-  const posts = await postRepository.findAll();
+  const posts = await getAllPublishedPosts();
 
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
@@ -18,8 +18,10 @@ export async function Posts() {
               src={post.coverImageUrl}
             />
             <PostText
+              postHeading={'h2'}
               dateTime={post.createdAt}
               time={getFormatedDateTime(post.createdAt)}
+              relativeDate={getRelativeDate(post.createdAt)}
               url={postLink}
               textContent={post.excerpt}
               title={post.title}
