@@ -1,10 +1,10 @@
 import { PostImage } from '../PostImage';
 import { PostText } from '../PostText';
 import { getFormatedDateTime, getRelativeDate } from '@/utils/get-formateddate';
-import { getAllPublishedPosts } from '@/utils/post/queries';
+import { getAllPublishedPostsCached } from '@/utils/post/queries';
 
 export async function Posts() {
-  const posts = await getAllPublishedPosts();
+  const posts = await getAllPublishedPostsCached();
 
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">

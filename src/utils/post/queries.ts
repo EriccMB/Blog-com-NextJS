@@ -1,12 +1,17 @@
 import { postRepository } from '@/repositories/post';
 import { cache } from 'react';
 
-export const getAllPublishedPosts = cache(async () => {
+export const getAllPublishedPostsCached = cache(async () => {
   const posts = await postRepository.findAllPublished();
   return posts;
 });
 
-export const getPostById = async (id: string) => {
+export const getPostByIdCached = cache(async (id: string) => {
   const post = await postRepository.findById(id);
   return post;
-};
+});
+
+export const getPostBySlugCached = cache(async (slug: string) => {
+  const post = await postRepository.findBySlug(slug);
+  return post;
+});

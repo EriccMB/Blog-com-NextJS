@@ -1,10 +1,10 @@
 import { getFormatedDateTime, getRelativeDate } from '@/utils/get-formateddate';
 import { PostImage } from '../PostImage';
 import { PostText } from '../PostText';
-import { getAllPublishedPosts } from '@/utils/post/queries';
+import { getAllPublishedPostsCached } from '@/utils/post/queries';
 
 export async function FeaturedPost() {
-  const posts = await getAllPublishedPosts();
+  const posts = await getAllPublishedPostsCached();
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 group mb-10">
       <PostImage
