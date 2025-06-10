@@ -3,6 +3,7 @@ import './globals.css';
 import { Container } from '@/components/Container';
 import { Header } from '@/components/Header';
 import { ButtonChangeTheme } from '@/components/ButtonChangeTheme';
+import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: {
@@ -24,9 +25,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
         <Container>
           <Header />
           {children}
-          <footer className="text-7xl font-extrabold text-center">
-            Footer
-          </footer>
+          <Footer />
         </Container>
         <ButtonChangeTheme />
       </body>
