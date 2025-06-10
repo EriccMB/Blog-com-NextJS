@@ -29,7 +29,6 @@ export class JsonPostRepository implements PostRepository {
   async findAllPublished(): Promise<PostModel[]> {
     await this.timeoutLoad();
     const posts = await this.readFromDisk();
-    console.log('findAllPublished');
     return posts.filter((post) => post.published);
   }
 
