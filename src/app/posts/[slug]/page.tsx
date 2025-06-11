@@ -1,6 +1,5 @@
 import { getPostBySlugCached } from '@/utils/post/queries';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
 
 type PostSlugPageProps = {
   params: Promise<{ slug: string }>;
@@ -8,16 +7,8 @@ type PostSlugPageProps = {
 
 export default async function PostSlugPage({ params }: PostSlugPageProps) {
   const { slug } = await params;
+  const post = await getPostBySlugCached(slug);
 
-  let post;
-
-  try {
-    post = await getPostBySlugCached(slug);
-  } catch {
-    post = undefined;
-  }
-
-  if (!post) notFound();
   return (
     <>
       <h1>{post.title}</h1>
@@ -26,6 +17,7 @@ export default async function PostSlugPage({ params }: PostSlugPageProps) {
         height={600}
         alt={post.title}
         src={post.coverImageUrl}
+        priority
       ></Image>
     </>
   );
