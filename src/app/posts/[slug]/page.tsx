@@ -1,24 +1,30 @@
+import { PostView } from '@/components/PostView';
+import { SpinLoading } from '@/components/SpinLoading';
 import { getPostBySlugCached } from '@/utils/post/queries';
-import Image from 'next/image';
+import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 type PostSlugPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export default async function PostSlugPage({ params }: PostSlugPageProps) {
+export async function generateMetadata({
+  params,
+}: PostSlugPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlugCached(slug);
+  return {
+    title: post.title,
+    description: post.excerpt,
+  };
+}
+
+export default async function PostSlugPage({ params }: PostSlugPageProps) {
+  const { slug } = await params;
 
   return (
-    <>
-      <h1>{post.title}</h1>
-      <Image
-        width={720}
-        height={600}
-        alt={post.title}
-        src={post.coverImageUrl}
-        priority
-      ></Image>
-    </>
+    <Suspense fallback={<SpinLoading spinClasses="min-h-100" />}>
+      <PostView slug={slug} />
+    </Suspense>
   );
 }

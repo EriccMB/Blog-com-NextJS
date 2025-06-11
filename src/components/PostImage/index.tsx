@@ -7,13 +7,15 @@ type PostImageProps = {
   src: string;
   alt: string;
   priority?: boolean;
+  linkClass?: string;
 };
 
-export function PostImage({ url, src, alt, priority }: PostImageProps) {
+export function PostImage({ url, src, alt, priority, linkClass }: PostImageProps) {
+  console.log(linkClass)
   return (
     <Link
       href={url}
-      className={clsx('w-full h-full overflow-hidden rounded-2xl')}
+      className={clsx('w-full h-full  overflow-hidden rounded-2xl ', linkClass)}
     >
       <Image
         className={clsx(

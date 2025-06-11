@@ -8,7 +8,7 @@ import { Suspense } from 'react';
 export default async function Home() {
   return (
     <>
-      <Suspense fallback={<SpinLoading />}>
+      <Suspense fallback={<SpinLoading spinClasses='min-h-100'/>}>
         <FeaturedPost />
         <Posts />
       </Suspense>

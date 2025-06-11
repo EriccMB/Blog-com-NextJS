@@ -1,6 +1,5 @@
 import { PostImage } from '../PostImage';
 import { PostText } from '../PostText';
-import { getFormatedDateTime, getRelativeDate } from '@/utils/get-formateddate';
 import { getAllPublishedPostsCached } from '@/utils/post/queries';
 
 export async function Posts() {
@@ -16,12 +15,11 @@ export async function Posts() {
               url={postLink}
               alt={post.title}
               src={post.coverImageUrl}
+              linkClass="max-h-50"
             />
             <PostText
               postHeading={'h2'}
               dateTime={post.createdAt}
-              time={getFormatedDateTime(post.createdAt)}
-              relativeDate={getRelativeDate(post.createdAt)}
               url={postLink}
               textContent={post.excerpt}
               title={post.title}

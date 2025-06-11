@@ -8,7 +8,7 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   title: {
     default: 'Blog',
-    template: '$s | Blog',
+    template: '%s | Blog',
   },
 
   description: 'Blog com NextJS',
