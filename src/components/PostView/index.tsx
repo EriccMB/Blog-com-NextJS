@@ -13,7 +13,7 @@ export async function PostView({ slug }: PostViewProps) {
   const postLink = `/posts/${post.slug}`;
   return (
     <article>
-      <header className='group flex flex-col gap-5 mb-5'>
+      <header className="group flex flex-col gap-5 mb-5">
         <Image
           className="rounded-xl"
           width={1200}
@@ -22,11 +22,15 @@ export async function PostView({ slug }: PostViewProps) {
           src={post.coverImageUrl}
           priority
         ></Image>
-        <PostHeading url={postLink} as='h1' >{post.title}</PostHeading>
-        <span>{post.author} | {<PostDate dateTime={post.createdAt} />}</span>
+        <PostHeading url={postLink} as="h1">
+          {post.title}
+        </PostHeading>
+        <span>
+          {post.author} | {<PostDate dateTime={post.createdAt} />}
+        </span>
       </header>
 
-      <p className='text-xl text-stone-700 mb-7 sm:text-2xl'>{post.excerpt}</p>
+      <p className="text-xl text-stone-700 mb-7 sm:text-2xl">{post.excerpt}</p>
 
       <SafeMarkdown markdown={post.content} />
     </article>

@@ -1,3 +1,4 @@
+'use client';
 type ErrorContainerProps = {
   title: string;
   titleContent: string;
