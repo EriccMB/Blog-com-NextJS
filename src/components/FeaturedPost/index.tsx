@@ -1,4 +1,3 @@
-import { getFormatedDateTime, getRelativeDate } from '@/utils/get-formateddate';
 import { PostImage } from '../PostImage';
 import { PostText } from '../PostText';
 import { getAllPublishedPostsCached } from '@/utils/post/queries';
@@ -16,8 +15,6 @@ export async function FeaturedPost() {
       <PostText
         postHeading={'h1'}
         dateTime={posts[0].createdAt}
-        time={getFormatedDateTime(posts[0].createdAt)}
-        relativeDate={getRelativeDate(posts[0].createdAt)}
         url={`/posts/${posts[0].slug}`}
         textContent={posts[0].excerpt}
         title={posts[0].title}
