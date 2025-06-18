@@ -29,9 +29,6 @@ export async function PostView({ slug }: PostViewProps) {
       <p className='text-xl text-stone-700 mb-7 sm:text-2xl'>{post.excerpt}</p>
 
       <SafeMarkdown markdown={post.content} />
-      {/* <div className='text-lg sm:text-xl'>
-        {post.content}
-      </div> */}
     </article>
   );
 }
