@@ -2,6 +2,7 @@ import { getPostBySlugCached } from '@/utils/post/queries';
 import Image from 'next/image';
 import { PostDate } from '../PostDate';
 import { PostHeading } from '../PostHeading';
+import { SafeMarkdown } from '../SafeMarkdown';
 
 type PostViewProps = {
   slug: string;
@@ -27,9 +28,10 @@ export async function PostView({ slug }: PostViewProps) {
 
       <p className='text-xl text-stone-700 mb-7 sm:text-2xl'>{post.excerpt}</p>
 
-      <div className='text-lg sm:text-xl'>
+      <SafeMarkdown markdown={post.content} />
+      {/* <div className='text-lg sm:text-xl'>
         {post.content}
-      </div>
+      </div> */}
     </article>
   );
 }
