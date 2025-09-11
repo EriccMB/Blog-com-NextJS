@@ -11,7 +11,7 @@ type PostImageProps = {
 };
 
 export function PostImage({ url, src, alt, priority, linkClass }: PostImageProps) {
-  console.log(linkClass)
+  
   return (
     <Link
       href={url}
