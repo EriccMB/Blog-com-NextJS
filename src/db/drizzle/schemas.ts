@@ -1,7 +1,7 @@
 import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-export const PostTable = sqliteTable('post', {
+export const postTable = sqliteTable('post', {
   id: text('id').primaryKey(),
   slug: text('slug').notNull().unique(),
   title: text('title').notNull(),
@@ -14,5 +14,5 @@ export const PostTable = sqliteTable('post', {
   updatedAt: text('updatedAt').notNull(),
 });
 
-export type PostTableSelectMode = InferSelectModel<typeof PostTable>;
-export type PostTableInsertMode = InferInsertModel<typeof PostTable>;
+export type PostTableSelectMode = InferSelectModel<typeof postTable>;
+export type PostTableInsertMode = InferInsertModel<typeof postTable>;
