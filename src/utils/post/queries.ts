@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { cache } from 'react';
 
 export const getAllPublishedPostsCached = cache(async () => {
-  const posts = await postRepository.findAllPublished();
+  const posts = await postRepository.findAllPublic();
   return posts;
 });
 
@@ -13,8 +13,10 @@ export const getPostByIdCached = cache(async (id: string) => {
 });
 
 export const getPostBySlugCached = cache(async (slug: string) => {
-  const post = await postRepository.findBySlug(slug).catch(() => undefined);
+  const post = await postRepository
+    .findBySlugPublic(slug)
+    .catch(() => undefined);
 
-  if(!post) notFound();
+  if (!post) notFound();
   return post;
 });
