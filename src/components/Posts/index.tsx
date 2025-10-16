@@ -1,6 +1,6 @@
 import { PostImage } from '../PostImage';
 import { PostText } from '../PostText';
-import { getAllPublishedPostsCached } from '@/utils/post/queries';
+import { getAllPublishedPostsCached } from '@/lib/post/queries';
 
 export async function Posts() {
   const posts = await getAllPublishedPostsCached();

@@ -1,6 +1,6 @@
 import { PostView } from '@/components/PostView';
 import { SpinLoading } from '@/components/SpinLoading';
-import { getPostBySlugCached } from '@/utils/post/queries';
+import { getPostBySlugCached } from '@/lib/post/queries';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
