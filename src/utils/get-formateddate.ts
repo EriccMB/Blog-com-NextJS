@@ -19,3 +19,11 @@ export function getRelativeDate(rawDate: string): string {
 
   return relativeDate;
 }
+
+export function formatHourTest(timestamp: number): string {
+  const date = new Date(timestamp);
+
+  const newDate = format(date, 'HH:mm:ss', { locale: ptBR });
+
+  return newDate;
+}
