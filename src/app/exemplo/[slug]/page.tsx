@@ -17,9 +17,22 @@ export const dynamic = 'force-static';
 export default async function ExemploTeste({ params }: {params: Promise<{slug: string}>}) {
     const hour = formatHourTest(Date.now());
     const {slug} = await params;
+
+    const apiURl = 'https://randomuser.me/api/?results=1';
+
+    const responseApi = await fetch(apiURl, {
+        next: {
+            tags: ['randomUserApi'],
+            revalidate: 10
+        }
+    });
+
+    const jsonApi = await responseApi.json();
+    const name = jsonApi.results[0].name.first;
+
     return (
         <>  
-        <h2>{hour} (id: {slug})</h2>
+        <h2> Nome: {name} | {hour} | (id: {slug})</h2>
         <form action={revalidateExampleAction}>
             <input type="hidden" name="path" defaultValue={`/exemplo/${slug}`}/>
             <button className="bg-stone-400 p-2 rounded text-white hover:bg-stone-500 cursor-pointer" type="submit">Revalidate</button>
