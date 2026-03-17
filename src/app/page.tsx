@@ -3,6 +3,8 @@ import { FeaturedPost } from '@/components/FeaturedPost';
 import { Posts } from '@/components/Posts';
 import { SpinLoading } from '@/components/SpinLoading';
 
+export const dynamic = 'force-static';
+
 import { Suspense } from 'react';
 
 export default async function Home() {
