@@ -1,4 +1,4 @@
-import { getPostBySlugCached } from '@/lib/post/queries';
+import { getPublicPostBySlugCached } from '@/lib/post/publicQueries';
 import Image from 'next/image';
 import { PostDate } from '../PostDate';
 import { PostHeading } from '../PostHeading';
@@ -9,7 +9,7 @@ type PostViewProps = {
 };
 
 export async function PostView({ slug }: PostViewProps) {
-  const post = await getPostBySlugCached(slug);
+  const post = await getPublicPostBySlugCached(slug);
   const postLink = `/posts/${post.slug}`;
   return (
     <article>

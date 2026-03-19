@@ -1,9 +1,9 @@
 import { PostImage } from '../PostImage';
 import { PostText } from '../PostText';
-import { getAllPublishedPostsCached } from '@/lib/post/queries';
+import { getAllPublicPostsCached } from '@/lib/post/publicQueries';
 
 export async function FeaturedPost() {
-  const posts = await getAllPublishedPostsCached();
+  const posts = await getAllPublicPostsCached();
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 group mb-10">
       <PostImage

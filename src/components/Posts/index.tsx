@@ -1,9 +1,9 @@
 import { PostImage } from '../PostImage';
 import { PostText } from '../PostText';
-import { getAllPublishedPostsCached } from '@/lib/post/queries';
+import { getAllPublicPostsCached } from '@/lib/post/publicQueries';
 
 export async function Posts() {
-  const posts = await getAllPublishedPostsCached();
+  const posts = await getAllPublicPostsCached();
 
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
