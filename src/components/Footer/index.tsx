@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export function Footer() {
   return (
-    <footer className="py-16 pb-16 text-center">
+    <footer className="py-16 pb-16  text-center">
       <Link
         className={clsx('hover:underline hover:text-stone-600')}
         href={'https://portfolioericmorais.netlify.app/'}

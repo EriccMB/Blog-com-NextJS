@@ -2,6 +2,7 @@ import { PostModel } from '@/models/post/post-model';
 import { PostRepository } from './post-repository';
 import { resolve } from 'path';
 import { readFile } from 'fs/promises';
+import { TIMEOUT_MS } from '@/lib/constants';
 
 // pega o caminho root do projeto
 const ROOT_DIR = process.cwd();
@@ -10,14 +11,13 @@ const JSON_POSTS_FILE_PATH = resolve(
   'src',
   'db',
   'seed',
-  'posts.json'
+  'posts.json',
 );
-const TIMEOUT = 0;
 
 export class JsonPostRepository implements PostRepository {
   private async timeoutLoad() {
-    if (TIMEOUT <= 0) return;
-    await new Promise((resolve) => setTimeout(resolve, TIMEOUT));
+    if (TIMEOUT_MS <= 0) return;
+    await new Promise((resolve) => setTimeout(resolve, TIMEOUT_MS));
   }
   private async readFromDisk(): Promise<PostModel[]> {
     const jsonData = await readFile(JSON_POSTS_FILE_PATH, 'utf-8');
@@ -27,7 +27,7 @@ export class JsonPostRepository implements PostRepository {
   }
 
   async findAllPublic(): Promise<PostModel[]> {
-    await this.timeoutLoad(); 
+    await this.timeoutLoad();
     const posts = await this.readFromDisk();
     return posts.filter((post) => post.published);
   }
