@@ -1,7 +1,6 @@
 import { getAllPostsAdmin } from '@/lib/post/admin-queries';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { deletePostAction } from '@/actions/post/post/delete-post-action';
 import DeleteButtonAdmin from '../admin/DeleteButtonAdmin';
 
 export default async function AdminPostList() {
@@ -32,34 +31,7 @@ export default async function AdminPostList() {
           );
         })}
       </div>
-      <div
-        className="bg-black/40 backdrop-blur-xs fixed inset-0 
-                      flex items-center justify-center"
-      >
-        <div
-          className="bg-stone-100 p-6 rounded-xl max-w-2xl mx-4
-                          flex flex-col gap-6
-                          shadow-lg shadow-black/30
-                          text-center"
-        >
-          <h3 className='font-extrabold text-xl'>Titulo do dialogo</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
-            cupiditate amet vitae. Eos, non dignissimos.
-          </p>
-          <div className="flex justify-around ">
-            <button className="bg-green-500 hover:bg-green-400 cursor-pointer text-white py-1 px-3 rounded-md ">
-              Ok
-            </button>
-            <button
-              className="bg-red-500 hover:bg-red-400 cursor-pointer text-white py-1 px-3 rounded-md "
-              autoFocus
-            >
-              Cancelar
-            </button>
-          </div>
-        </div>
-      </div>
+      
     </>
   );
 }
