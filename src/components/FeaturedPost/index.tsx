@@ -1,9 +1,19 @@
+import { ErrorContainer } from '../ErrorContainer';
 import { PostImage } from '../PostImage';
 import { PostText } from '../PostText';
 import { getAllPublicPostsCached } from '@/lib/post/public-queries';
 
 export async function FeaturedPost() {
   const posts = await getAllPublicPostsCached();
+
+  if (posts.length <= 0) {
+    return (
+      <ErrorContainer
+        titleContent="🤔"
+        content="Não há nenhum post por aqui..."
+      />
+    );
+  }
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 group mb-10">
       <PostImage

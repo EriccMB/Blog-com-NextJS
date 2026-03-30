@@ -2,10 +2,19 @@ import { getAllPostsAdmin } from '@/lib/post/admin-queries';
 import clsx from 'clsx';
 import Link from 'next/link';
 import DeleteButtonAdmin from '../admin/DeleteButtonAdmin';
+import { ErrorContainer } from '../ErrorContainer';
 
 export default async function AdminPostList() {
   const posts = await getAllPostsAdmin();
 
+  if (posts.length <= 0) {
+    return (
+      <ErrorContainer
+        titleContent="🤔"
+        content="Não há nenhum post a ser atualizado"
+      />
+    );
+  }
   return (
     <>
       <div className="mb-16 bg-stone-100 rounded-xl border-2 border-stone-400 overflow-hidden">
@@ -31,7 +40,6 @@ export default async function AdminPostList() {
           );
         })}
       </div>
-      
     </>
   );
 }

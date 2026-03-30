@@ -22,9 +22,10 @@ export default function DeleteButtonAdmin({
 
   async function handleConfirm() {
     startTransition(async () => {
-      await deletePostAction(id);
-      alert('excluindo' + id);
+      const result = await deletePostAction(id);
       setShowDialog(false);
+
+      if (result.error) alert(`Erro: ${result.error}`);
     });
   }
 

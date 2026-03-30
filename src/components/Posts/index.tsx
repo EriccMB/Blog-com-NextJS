@@ -5,6 +5,7 @@ import { getAllPublicPostsCached } from '@/lib/post/public-queries';
 export async function Posts() {
   const posts = await getAllPublicPostsCached();
 
+  if(posts.length <=1) return null;
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
       {posts.slice(1).map((post) => {
