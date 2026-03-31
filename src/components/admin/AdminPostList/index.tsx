@@ -17,7 +17,7 @@ export default async function AdminPostList() {
   }
   return (
     <>
-      <div className="mb-16 bg-stone-100 rounded-xl border-2 border-stone-400 overflow-hidden">
+      <div className="mb-16 bg-stone-100 overflow-hidden">
         {posts.map((post) => {
           return (
             <div
@@ -25,7 +25,7 @@ export default async function AdminPostList() {
               className={clsx(
                 'py-2 px-2',
                 !post.published && 'bg-stone-200',
-                'border-b border-stone-400',
+                'hover:bg-stone-300',
                 'flex items-center justify-between',
               )}
             >

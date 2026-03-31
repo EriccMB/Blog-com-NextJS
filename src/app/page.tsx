@@ -6,7 +6,6 @@ import { SpinLoading } from '@/components/SpinLoading';
 export const dynamic = 'force-static';
 
 import { Suspense } from 'react';
-import { Bounce, ToastContainer } from 'react-toastify';
 
 export default async function Home() {
   return (

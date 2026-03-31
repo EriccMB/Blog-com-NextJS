@@ -4,7 +4,6 @@ import { Container } from '@/components/Container';
 import { Header } from '@/components/Header';
 import { ButtonChangeTheme } from '@/components/ButtonChangeTheme';
 import { Footer } from '@/components/Footer';
-import { Bounce, ToastContainer } from 'react-toastify';
 import { ToastifyContainer } from '@/components/ToastifyContainer';
 
 export const metadata: Metadata = {
