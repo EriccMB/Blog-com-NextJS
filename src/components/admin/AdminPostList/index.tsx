@@ -1,8 +1,8 @@
 import { getAllPostsAdmin } from '@/lib/post/admin-queries';
 import clsx from 'clsx';
 import Link from 'next/link';
-import DeleteButtonAdmin from '../admin/DeleteButtonAdmin';
-import { ErrorContainer } from '../ErrorContainer';
+import DeleteButtonAdmin from '../DeleteButtonAdmin';
+import { ErrorContainer } from '../../ErrorContainer';
 
 export default async function AdminPostList() {
   const posts = await getAllPostsAdmin();

@@ -1,8 +1,10 @@
 'use client';
 import { deletePostAction } from '@/actions/post/post/delete-post-action';
+import { toastifyAdapter } from '@/adapters/toastifyAdapter';
 import Dialog from '@/components/Dialog';
 import { Trash2Icon } from 'lucide-react';
 import { useState, useTransition } from 'react';
+import { toast } from 'react-toastify';
 
 type DeleteButtonAdminProps = {
   id: string;
@@ -24,8 +26,12 @@ export default function DeleteButtonAdmin({
     startTransition(async () => {
       const result = await deletePostAction(id);
       setShowDialog(false);
+      if (result.error) {
+        toastifyAdapter.error(result.error);
+        return;
+      }
 
-      if (result.error) alert(`Erro: ${result.error}`);
+      toastifyAdapter.success('Post excluído!');
     });
   }
 

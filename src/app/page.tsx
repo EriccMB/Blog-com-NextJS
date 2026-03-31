@@ -6,11 +6,12 @@ import { SpinLoading } from '@/components/SpinLoading';
 export const dynamic = 'force-static';
 
 import { Suspense } from 'react';
+import { Bounce, ToastContainer } from 'react-toastify';
 
 export default async function Home() {
   return (
     <>
-      <Suspense fallback={<SpinLoading spinClasses='min-h-100'/>}>
+      <Suspense fallback={<SpinLoading spinClasses="min-h-100" />}>
         <FeaturedPost />
         <Posts />
       </Suspense>
