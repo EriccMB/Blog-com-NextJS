@@ -1,4 +1,5 @@
 'use client';
+import Button from '@/components/Button';
 import clsx from 'clsx';
 import {
   ArrowDown,
@@ -26,13 +27,13 @@ export default function MenuAdmin() {
 
   const navClasses = clsx(
     'bg-stone-900 text-stone-100 flex flex-col ',
-    'rounded-lg gap-2 mb-6',
+    'rounded-lg gap-2 mb-12',
     // 'sm:grid sm:grid-cols-6 sm:justify-center sm:h-auto ',
     'sm:flex-row sm:flex-wrap sm:justify-around sm:h-auto ',
     !isOpen && 'h-10 overflow-hidden',
   );
   const linkClasses = clsx(
-    'flex items-center gap-2 p-2 transition hover:bg-stone-700 h-10 shrink-0 rounded-lg cursor-pointer sm:justify-center',
+    'flex items-center gap-2 p-2 transition hover:bg-stone-700 h-10 shrink-0 rounded-lg cursor-pointer sm:justify-center min-w-40',
   );
   const openedClosedButton = clsx(linkClasses, 'italic sm:hidden');
   return (
@@ -67,6 +68,7 @@ export default function MenuAdmin() {
         <LogOutIcon />
         Sair
       </Link>
+
     </nav>
   );
 }

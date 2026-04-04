@@ -1,3 +1,5 @@
+import Button from '../Button';
+
 type DialogProps = {
   isVisible?: boolean;
   title: string;
@@ -18,7 +20,7 @@ export default function Dialog({
   if (!isVisible) return null;
 
   function handleCancel() {
-    if(disabled) return;
+    if (disabled) return;
 
     onCancel();
   }
@@ -44,21 +46,18 @@ export default function Dialog({
         </h3>
         <div id="dialog-content">{content}</div>
         <div className="flex justify-around ">
-          <button
-            className="bg-green-500 hover:bg-green-400 cursor-pointer text-white py-1 px-3 rounded-md disabled:bg-stone-400 disabled:cursor-not-allowed"
-            onClick={onConfirm}
-            disabled={disabled}
-          >
+          <Button variant="default" onClick={onConfirm} disabled={disabled}>
             Ok
-          </button>
-          <button
-            className="bg-red-500 hover:bg-red-400 cursor-pointer text-white py-1 px-3 rounded-md disabled:bg-stone-400 disabled:cursor-not-allowed"
+          </Button>
+
+          <Button
+            variant="danger"
             autoFocus
             onClick={handleCancel}
             disabled={disabled}
           >
             Cancelar
-          </button>
+          </Button>
         </div>
       </div>
     </div>
