@@ -1,0 +1,61 @@
+'use server';
+
+import { IMAGE_SERVER_URL, IMAGE_UPLOADED_DIR, IMAGE_UPLOADER_MAX_SIZE } from '@/lib/constants';
+import { mkdir, writeFile } from 'fs/promises';
+import { extname, resolve } from 'path';
+
+type UploadImageActionResult = {
+  url: string;
+  error: string;
+};
+
+export async function uploadImageAction(
+  formData: FormData,
+): Promise<UploadImageActionResult> {
+  //TODO VERIFICAR LOGIN DO USUARIO
+
+  const makeResult = ({ url = '', error = '' }) => ({ url, error });
+
+  if (!(formData instanceof FormData)) {
+    return makeResult({ error: 'Dados inválidos' });
+  }
+
+  const file = formData.get('file');
+
+  if (!(file instanceof File)) {
+    return makeResult({ error: 'Arquivo inválido' });
+  }
+
+  if (file.size > IMAGE_UPLOADER_MAX_SIZE) {
+    return makeResult({ error: 'Arquivo muito grande' });
+  }
+
+  if (!file.type.startsWith('image/')) {
+    return makeResult({ error: 'Imagem inválida' });
+  }
+
+  const imageExtension = extname(file.name);
+  const uniqueImageName = `${Date.now()}${imageExtension}`;
+
+  console.log(uniqueImageName);
+
+  // CRIA A PASTA uploads CASO NÃO EXISTIR
+  const uploadFolderPath = resolve(process.cwd(), 'public', IMAGE_UPLOADED_DIR);
+
+  await mkdir(uploadFolderPath, { recursive: true });
+
+  // SALVAR NA PASTA UPLOADS SÓ FUNCIONA EM DEV, PARA ISSO FUNCIONAR EM PRODUÇÃO, 
+  // O SERVIDOR TERIA QUE REINICIAR, PORQUE O CACHE NÃO VAI ATUALIZAR
+
+  // PEGA OS BYTES DO ARQUIVO PARA O NODE ENTENDER
+  const fileArrayBuffer = await file.arrayBuffer();
+  const buffer = Buffer.from(fileArrayBuffer);
+
+  const fileFullPath = resolve(uploadFolderPath, uniqueImageName);
+
+  await writeFile(fileFullPath, buffer);
+
+  const url  = `${IMAGE_SERVER_URL}/${uniqueImageName}`
+
+  return makeResult({ url: `URL DA IMAGEM: ${url}` });
+}

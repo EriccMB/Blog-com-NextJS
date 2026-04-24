@@ -1,13 +1,16 @@
 'use client';
 
+import { uploadImageAction } from '@/actions/post/post/upload-image-action';
 import { toastifyAdapter } from '@/adapters/toastifyAdapter';
 import Button from '@/components/Button';
 import { IMAGE_UPLOADER_MAX_SIZE } from '@/lib/constants';
 import { ImageUpIcon } from 'lucide-react';
-import { useRef } from 'react';
+import { useRef, useTransition } from 'react';
 
 export default function ImageUploader() {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, startTransition] = useTransition();
+
   function handleChooseFile() {
     if (!fileInputRef.current) return;
 
@@ -15,6 +18,8 @@ export default function ImageUploader() {
   }
 
   function handleChange() {
+    // TODO CONSERTAR dismiss
+    // toastifyAdapter.dismiss;
     if (!fileInputRef.current) return;
 
     const fileInput = fileInputRef?.current;
@@ -35,8 +40,17 @@ export default function ImageUploader() {
     const formData = new FormData();
     formData.append('file', file);
 
-    // CRIAR A ACTION PARA UPLOAD DO ARQ
-    console.log(formData.get('file'));
+    startTransition(async () => {
+      const result = await uploadImageAction(formData);
+
+      if (result.error) {
+        toastifyAdapter.error(result.error);
+        fileInput.value = '';
+        return;
+      }
+
+      toastifyAdapter.success(result.url);
+    });
 
     fileInput.value = '';
   }
@@ -55,7 +69,7 @@ export default function ImageUploader() {
         className="hidden"
         type="file"
         name="file"
-        accept="image/*"
+        // accept="image/*"
         ref={fileInputRef}
       />
     </div>
