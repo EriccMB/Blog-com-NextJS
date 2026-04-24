@@ -1,6 +1,11 @@
 'use server';
 
-import { IMAGE_SERVER_URL, IMAGE_UPLOADED_DIR, IMAGE_UPLOADER_MAX_SIZE } from '@/lib/constants';
+import {
+  IMAGE_SERVER_URL,
+  IMAGE_UPLOADED_DIR,
+  IMAGE_UPLOADER_MAX_SIZE,
+} from '@/lib/constants';
+import { asyncDelay } from '@/utils/async-delay';
 import { mkdir, writeFile } from 'fs/promises';
 import { extname, resolve } from 'path';
 
@@ -37,14 +42,12 @@ export async function uploadImageAction(
   const imageExtension = extname(file.name);
   const uniqueImageName = `${Date.now()}${imageExtension}`;
 
-  console.log(uniqueImageName);
-
   // CRIA A PASTA uploads CASO NÃO EXISTIR
   const uploadFolderPath = resolve(process.cwd(), 'public', IMAGE_UPLOADED_DIR);
 
   await mkdir(uploadFolderPath, { recursive: true });
 
-  // SALVAR NA PASTA UPLOADS SÓ FUNCIONA EM DEV, PARA ISSO FUNCIONAR EM PRODUÇÃO, 
+  // SALVAR NA PASTA UPLOADS SÓ FUNCIONA EM DEV, PARA ISSO FUNCIONAR EM PRODUÇÃO,
   // O SERVIDOR TERIA QUE REINICIAR, PORQUE O CACHE NÃO VAI ATUALIZAR
 
   // PEGA OS BYTES DO ARQUIVO PARA O NODE ENTENDER
@@ -55,7 +58,7 @@ export async function uploadImageAction(
 
   await writeFile(fileFullPath, buffer);
 
-  const url  = `${IMAGE_SERVER_URL}/${uniqueImageName}`
+  const url = `${IMAGE_SERVER_URL}/${uniqueImageName}`;
 
-  return makeResult({ url: `URL DA IMAGEM: ${url}` });
+  return makeResult({ url });
 }
