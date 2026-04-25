@@ -1,6 +1,6 @@
 'use client';
 
-import { uploadImageAction } from '@/actions/post/post/upload-image-action';
+import { uploadImageAction } from '@/actions/post/upload-image-action';
 import { toastifyAdapter } from '@/adapters/toastifyAdapter';
 import Button from '@/components/Button';
 import { IMAGE_UPLOADER_MAX_SIZE } from '@/lib/constants';
@@ -40,7 +40,7 @@ export default function ImageUploader() {
     if (file.size > IMAGE_UPLOADER_MAX_SIZE) {
       toastifyAdapter.error(
         `Imagem muito grande. Tamanho máximo: ${IMAGE_UPLOADER_MAX_SIZE / 1024} kb`,
-      ); 
+      );
       fileInput.value = '';
       setImgUrl('');
       return;

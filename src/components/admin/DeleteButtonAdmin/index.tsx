@@ -1,5 +1,5 @@
 'use client';
-import { deletePostAction } from '@/actions/post/post/delete-post-action';
+import { deletePostAction } from '@/actions/post/delete-post-action';
 import { toastifyAdapter } from '@/adapters/toastifyAdapter';
 import Dialog from '@/components/Dialog';
 import { Trash2Icon } from 'lucide-react';
