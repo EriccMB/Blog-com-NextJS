@@ -10,6 +10,6 @@ export interface PostRepository {
   deletePost(id: string): Promise<PostModel>;
   updatePost(
     id: string,
-    newPostData: Omit<PostModel, 'id' | 'slug' | 'createdAt'>,
+    newPostData: Omit<PostModel, 'id' | 'slug' | 'createdAt' | 'updatedAt'>,
   ): Promise<PostModel>;
 }
