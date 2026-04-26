@@ -110,22 +110,3 @@ export class DrizzlePostRepository implements PostRepository {
     };
   }
 }
-
-// (async () => {
-//   const repo = new DrizzlePostRepository();
-
-//   const posts = await repo.findAllPublic();
-//   posts.forEach((post) => {
-//     console.log(post.slug, post.published);
-//   });
-
-//   await repo.findBySlugPublic('rsotina-matinal-de-pessoas-altamente-eficazes');
-
-//   const posts = await repo.findAll();
-//   posts.forEach((post) => {
-//     console.log(post.id, post.published);
-//   });
-
-//   const post = await repo.findById('99f8adsd4-7684-4c16-a316-616271db199e');
-//   console.log(post.id, post.published);
-// })();

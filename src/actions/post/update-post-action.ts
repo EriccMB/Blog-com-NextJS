@@ -6,16 +6,15 @@ import {
   PublicPost,
 } from '@/dto/post/dto';
 import { PostUpdateSchema } from '@/lib/post/validations';
-import { PostModel } from '@/models/post/post-model';
 import { postRepository } from '@/repositories/post';
-import { asyncDelay } from '@/utils/async-delay';
 import { getZodErrorMessages } from '@/utils/get-zod-error-message';
+import { makeRandomString } from '@/utils/make-random-string';
 import { revalidateTag } from 'next/cache';
 
 type UpdatePostActionResult = {
   formState: PublicPost;
   errors: string[];
-  success?: true;
+  success?: string;
 };
 
 export async function updatePostAction(
@@ -24,7 +23,6 @@ export async function updatePostAction(
 ): Promise<UpdatePostActionResult> {
   // TODO verificar se o usuario esta logado
 
-  await asyncDelay(2000, true)
 
   const makeResult = ({ formState = prevState.formState, errors = [''] }) => ({
     formState,
@@ -86,6 +84,6 @@ export async function updatePostAction(
   return {
     formState: makePublicPostFromDB(post),
     errors: [],
-    success: true,
+    success: makeRandomString(),
   };
 }

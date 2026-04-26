@@ -10,6 +10,7 @@ import { makePartialPublicPost, PublicPost } from '@/dto/post/dto';
 import { createPostAction } from '@/actions/post/create-post-action';
 import { toastifyAdapter } from '@/adapters/toastifyAdapter';
 import { updatePostAction } from '@/actions/post/update-post-action';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type ManagePostFormUpdateProps = {
   mode: 'update';
@@ -24,6 +25,11 @@ type ManagePostFormProps =
 
 export default function ManagePostForm(props: ManagePostFormProps) {
   const { mode } = props;
+
+  const searchParams = useSearchParams();
+  const created = searchParams.get('created');
+  const router = useRouter();
+
   let publicPost;
   if (mode === 'update') {
     publicPost = props.publicPost;
@@ -52,6 +58,7 @@ export default function ManagePostForm(props: ManagePostFormProps) {
       state.errors.forEach((e) => toastifyAdapter.error(e));
     }
   }, [state.errors]);
+
   useEffect(() => {
     if (state.success) {
       toastifyAdapter.dismiss();
@@ -59,6 +66,16 @@ export default function ManagePostForm(props: ManagePostFormProps) {
     }
   }, [state.success]);
 
+  useEffect(() => {
+    if (created === '1') {
+      toastifyAdapter.dismiss();
+      toastifyAdapter.success('Post criado com sucesso');
+      const url = new URL(window.location.href);
+      url.searchParams.delete('created');
+
+      router.replace(url.toString());
+    }
+  }, [created, router]);
   const { formState } = state;
   const [contentValue, setContentValue] = useState(formState?.content || '');
 
