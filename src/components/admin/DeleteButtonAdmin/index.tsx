@@ -23,6 +23,7 @@ export default function DeleteButtonAdmin({
   }
 
   async function handleConfirm() {
+    toastifyAdapter.dismiss();
     startTransition(async () => {
       const result = await deletePostAction(id);
       setShowDialog(false);

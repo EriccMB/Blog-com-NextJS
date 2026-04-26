@@ -3,11 +3,12 @@
 import Button from '@/components/Button';
 import InputCheckBox from '@/components/InputCheckBox';
 import InputText from '@/components/InputText';
-import { useActionState, useState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { MarkdownEditor } from '@/components/MarkdownEditor';
 import ImageUploader from '../ImageUploader';
 import { makePartialPublicPost, PublicPost } from '@/dto/post/dto';
 import { createPostAction } from '@/actions/post/create-post-action';
+import { toastifyAdapter } from '@/adapters/toastifyAdapter';
 
 type ManagePostFormProps = {
   publicPost?: PublicPost;
@@ -25,6 +26,13 @@ export default function ManagePostForm({ publicPost }: ManagePostFormProps) {
     createPostAction,
     initialState,
   );
+
+  useEffect(() => {
+    if(state.errors.length > 0) {
+      toastifyAdapter.dismiss();
+      state.errors.forEach(e => toastifyAdapter.error(e));
+    }
+  }, [state.errors]);
 
   const { formState } = state;
   const [contentValue, setContentValue] = useState(formState?.content || '');

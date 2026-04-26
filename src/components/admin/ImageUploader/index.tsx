@@ -22,8 +22,7 @@ export default function ImageUploader() {
   }
 
   function handleChange() {
-    // TODO CONSERTAR dismiss
-    // toastifyAdapter.dismiss;
+    toastifyAdapter.dismiss();
     if (!fileInputRef.current) {
       setImgUrl('');
       return;
@@ -80,7 +79,7 @@ export default function ImageUploader() {
       {!!imgUrl && (
         <div className="flex flex-col gap-4 ">
           <p>
-            <b>URL:</b>
+            <b>URL: </b>
             {imgUrl}
           </p>
           <img src={imgUrl} alt="" className="rounded-xl" />
