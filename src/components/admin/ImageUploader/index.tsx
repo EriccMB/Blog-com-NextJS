@@ -74,7 +74,7 @@ export default function ImageUploader({disabled = false}: ImageUploaderProps) {
     <div className="flex flex-col gap-2">
       <Button
         type="button"
-        className="self-start flex gap-2"
+        className="self-start"
         onClick={handleChooseFile}
         disabled={isUploading || disabled}
       >

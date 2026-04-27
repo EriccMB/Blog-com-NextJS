@@ -15,7 +15,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const buttonDefaultStyles = clsx(
-    'text-center rounded-lg cursor-pointer hover:opacity-85 transtion',
+    'text-center rounded-lg cursor-pointer hover:opacity-85 transtion flex justify-center gap-2',
     'disabled:bg-stone-400 disabled:cursor-not-allowed',
   );
 
