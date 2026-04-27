@@ -21,7 +21,7 @@ export default async function AdminPageIDPost({
 }: AdminPageIDPostProps) {
   const { id } = await params;
 
-  const post = await getPostByIdAdmin(id).catch();
+  const post = await getPostByIdAdmin(id).catch(() => undefined);
   if (!post) notFound();
 
   const publicPost = await makePublicPostFromDB(post);

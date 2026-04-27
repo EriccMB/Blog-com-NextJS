@@ -1,10 +1,5 @@
 'use server';
 
-import {
-  IMAGE_SERVER_URL,
-  IMAGE_UPLOADED_DIR,
-  IMAGE_UPLOADER_MAX_SIZE,
-} from '@/lib/constants';
 import { mkdir, writeFile } from 'fs/promises';
 import { extname, resolve } from 'path';
 
@@ -30,8 +25,14 @@ export async function uploadImageAction(
     return makeResult({ error: 'Arquivo inválido' });
   }
 
-  if (file.size > IMAGE_UPLOADER_MAX_SIZE) {
-    return makeResult({ error: 'Arquivo muito grande' });
+  const uploaderMaxSize =
+    Number(process.env.NEXT_PUBLIC_IMAGE_UPLOADER_MAX_SIZE) || 921600;
+
+  if (file.size > uploaderMaxSize) {
+    const readbleMaxSize = (uploaderMaxSize / 1024).toFixed(2);
+    return makeResult({
+      error: ` Arquivo muito grande. Max: ${readbleMaxSize}KB`,
+    });
   }
 
   if (!file.type.startsWith('image/')) {
@@ -42,7 +43,8 @@ export async function uploadImageAction(
   const uniqueImageName = `${Date.now()}${imageExtension}`;
 
   // CRIA A PASTA uploads CASO NÃO EXISTIR
-  const uploadFolderPath = resolve(process.cwd(), 'public', IMAGE_UPLOADED_DIR);
+  const uploadedImgDir = process.env.IMAGE_UPLOADED_DIR || 'uploads';
+  const uploadFolderPath = resolve(process.cwd(), 'public', uploadedImgDir);
 
   await mkdir(uploadFolderPath, { recursive: true });
 
@@ -57,7 +59,9 @@ export async function uploadImageAction(
 
   await writeFile(fileFullPath, buffer);
 
-  const url = `${IMAGE_SERVER_URL}/${uniqueImageName}`;
+  const imageServerURL =
+    process.env.IMAGE_SERVER_URL || 'http://localhost:3000/uploads';
+  const url = `${imageServerURL}/${uniqueImageName}`;
 
   return makeResult({ url });
 }

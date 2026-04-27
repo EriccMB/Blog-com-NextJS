@@ -3,7 +3,6 @@
 import { uploadImageAction } from '@/actions/post/upload-image-action';
 import { toastifyAdapter } from '@/adapters/toastifyAdapter';
 import Button from '@/components/Button';
-import { IMAGE_UPLOADER_MAX_SIZE } from '@/lib/constants';
 import { ImageUpIcon } from 'lucide-react';
 import { useRef, useState, useTransition } from 'react';
 
@@ -40,9 +39,11 @@ export default function ImageUploader({disabled = false}: ImageUploaderProps) {
       return;
     }
 
-    if (file.size > IMAGE_UPLOADER_MAX_SIZE) {
+    const uploaderMaxSize = Number(process.env.NEXT_PUBLIC_IMAGE_UPLOADER_MAX_SIZE) || 921600;
+
+    if (file.size > uploaderMaxSize) {
       toastifyAdapter.error(
-        `Imagem muito grande. Tamanho máximo: ${IMAGE_UPLOADER_MAX_SIZE / 1024} kb`,
+        `Imagem muito grande. Tamanho máximo: ${uploaderMaxSize / 1024} kb`,
       );
       fileInput.value = '';
       setImgUrl('');
