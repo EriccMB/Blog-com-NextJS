@@ -17,9 +17,9 @@ export default function LoginForm() {
   const [state, action, isPending] = useActionState(loginAction, initialState);
 
   useEffect(() => {
-    if (state.error) {
+    if (state?.error) {
       toastifyAdapter.dismiss();
-      toastifyAdapter.error(state.error);
+      toastifyAdapter.error(state?.error);
     }
   }, [state]);
 
@@ -37,7 +37,7 @@ export default function LoginForm() {
           labelText="Usuário"
           placeholder="Seu usuário"
           disabled={isPending}
-          defaultValue={state.username}
+          defaultValue={state?.username}
         />
 
         <InputText
@@ -53,7 +53,7 @@ export default function LoginForm() {
           Entrar
         </Button>
 
-        {!!state.error && <p className="text-red-600">{state.error}</p>}
+        {!!state?.error && <p className="text-red-600">{state?.error}</p>}
       </form>
     </div>
   );
