@@ -1,25 +1,23 @@
 'use client';
-import Button from '@/components/Button';
+import { logoutAction } from '@/actions/login/loguot-action';
 import clsx from 'clsx';
 import {
-  ArrowDown,
   CircleX,
   FileTextIcon,
   HomeIcon,
-  LockOpenIcon,
-  LogOut,
+  HourglassIcon,
   LogOutIcon,
   MenuIcon,
   PlusIcon,
-  Text,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 
 export default function MenuAdmin() {
   const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname();
+  const [isPending, startTranstiton] = useTransition();
 
   useEffect(() => {
     setIsOpen(false);
@@ -36,6 +34,13 @@ export default function MenuAdmin() {
     'flex items-center gap-2 p-2 transition hover:bg-stone-700 h-10 shrink-0 rounded-lg cursor-pointer sm:justify-center min-w-40',
   );
   const openedClosedButton = clsx(linkClasses, 'italic sm:hidden');
+
+  function handleLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    e.preventDefault();
+    startTranstiton(async () => {
+      await logoutAction();
+    });
+  }
   return (
     <nav className={navClasses}>
       <button className={openedClosedButton} onClick={() => setIsOpen(!isOpen)}>
@@ -64,11 +69,20 @@ export default function MenuAdmin() {
         <PlusIcon />
         Novo Post
       </Link>
-      <Link href="#" className={linkClasses}>
-        <LogOutIcon />
-        Sair
-      </Link>
-
+      <a href="#" className={linkClasses} onClick={handleLogout}>
+        {isPending && (
+          <>
+            <HourglassIcon />
+            Aguarde...
+          </>
+        )}
+        {!isPending && (
+          <>
+            <LogOutIcon />
+            Sair
+          </>
+        )}
+      </a>
     </nav>
   );
 }
