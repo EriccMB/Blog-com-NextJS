@@ -5,6 +5,7 @@ import {
   makePublicPostFromDB,
   PublicPost,
 } from '@/dto/post/dto';
+import { verifyLoginSession } from '@/lib/login/manage-login';
 import { PostUpdateSchema } from '@/lib/post/validations';
 import { postRepository } from '@/repositories/post';
 import { getZodErrorMessages } from '@/utils/get-zod-error-message';
@@ -21,8 +22,7 @@ export async function updatePostAction(
   prevState: UpdatePostActionResult,
   formData: FormData,
 ): Promise<UpdatePostActionResult> {
-  // TODO verificar se o usuario esta logado
-
+  const isAuthenticated = await verifyLoginSession();
 
   const makeResult = ({ formState = prevState.formState, errors = [''] }) => ({
     formState,
@@ -47,6 +47,13 @@ export async function updatePostAction(
 
   const formDataObj = Object.fromEntries(formData.entries());
   const zodParsedObj = PostUpdateSchema.safeParse(formDataObj);
+
+  if (!isAuthenticated) {
+    return {
+      formState: makePartialPublicPost(formDataObj),
+      errors: ['Faça login em outra aba para continuar'],
+    };
+  }
 
   if (!zodParsedObj.success) {
     const errors = getZodErrorMessages(zodParsedObj.error.format());

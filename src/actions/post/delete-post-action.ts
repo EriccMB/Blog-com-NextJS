@@ -1,11 +1,18 @@
 'use server';
 
+import { verifyLoginSession } from '@/lib/login/manage-login';
 import { postRepository } from '@/repositories/post';
 import { revalidatePath, revalidateTag } from 'next/cache';
 
 
 export async function deletePostAction(id: string) {
-  // TODO falta a verificação de login
+    const isAuthenticated = await verifyLoginSession();
+
+      if (!isAuthenticated) {
+    return {
+      error: 'Faça login novamente',
+    };
+  }
 
   if (!id || typeof id !== 'string') {
     return {
